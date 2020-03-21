@@ -1,5 +1,6 @@
 from flask import Flask, request
-from urllib.request import *
+import requests
+
 import oneagent
 
 # Justin Hagerty
@@ -44,19 +45,17 @@ def anotherTest():
         return "Hello World!"
 
 
-@app.route("/outgoing")
-def outgoing():
+@app.route("/outgoingflask")
+def outgoingflask():
     traceRequest = sdk.trace_incoming_web_request(wappinfo, request.base_url, request.method, dict(request.headers))
     with traceRequest:
         url = 'http://127.0.0.1'
-        req = Request(url)
-        req.add_header('header1', '1234')
-        req.add_header('header2', '5678')
-        outGoingTracer = sdk.trace_outgoing_web_request(url, req.get_method(), req.headers)
+        outGoingTracer = sdk.trace_outgoing_web_request(url, "GET")
         with outGoingTracer:
             tag = outGoingTracer.outgoing_dynatrace_string_tag
-            req.add_header(DYNATRACE_HTTP_HEADER_NAME, tag)
-            response = urlopen(req)
+            headers = {"Test": "things", DYNATRACE_HTTP_HEADER_NAME: tag}
+            response = requests.get(url, headers=headers)
+            print(response)
         traceRequest.set_status_code(200)
         return "Hello World!"
 
