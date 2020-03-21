@@ -38,5 +38,6 @@ Looks like the end result is for dynatrace to have openTelemetry support for pyt
 
 Other technologies to look into for python SDK examples: https://cherrypy.org/
 
-Easter Egg: Might be worth looking into python lambda functions
+### Easter Egg: 
+Might be worth looking into python lambda functions
 https://stackabuse.com/lambda-functions-in-python/
