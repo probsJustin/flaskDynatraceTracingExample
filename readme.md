@@ -41,3 +41,6 @@ Other technologies to look into for python SDK examples: https://cherrypy.org/
 ### Easter Egg: 
 Might be worth looking into python lambda functions
 https://stackabuse.com/lambda-functions-in-python/
+
+
+Separate Example From Zach Podbielniak: https://gitlab.com/zachpodbielniak/RSC/-/blob/master/Src/RSC.py
