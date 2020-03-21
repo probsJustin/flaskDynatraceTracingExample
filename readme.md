@@ -45,3 +45,5 @@ https://stackabuse.com/lambda-functions-in-python/
 
 
 Separate Example From Zach Podbielniak: https://gitlab.com/zachpodbielniak/RSC/-/blob/master/Src/RSC.py
+
+Also added here in this repo: https://github.com/probsJustin/flaskDynatraceTracingExample/tree/master/ZachPodbielniak
