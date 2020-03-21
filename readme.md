@@ -20,6 +20,7 @@ else:
 ````
 ## Other Examples and Documenation: 
 https://dynatrace.github.io/OneAgent-SDK-for-Python/docs/index.html
+
 https://dynatrace.github.io/OneAgent-SDK-for-Python/docs/quickstart.html
 
 Blog post about the future of python instrumention: 
@@ -38,5 +39,9 @@ Looks like the end result is for dynatrace to have openTelemetry support for pyt
 
 Other technologies to look into for python SDK examples: https://cherrypy.org/
 
-Easter Egg: Might be worth looking into python lambda functions
+### Easter Egg: 
+Might be worth looking into python lambda functions
 https://stackabuse.com/lambda-functions-in-python/
+
+
+Separate Example From Zach Podbielniak: https://gitlab.com/zachpodbielniak/RSC/-/blob/master/Src/RSC.py
