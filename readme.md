@@ -20,6 +20,7 @@ else:
 ````
 ## Other Examples and Documenation: 
 https://dynatrace.github.io/OneAgent-SDK-for-Python/docs/index.html
+
 https://dynatrace.github.io/OneAgent-SDK-for-Python/docs/quickstart.html
 
 Blog post about the future of python instrumention: 
