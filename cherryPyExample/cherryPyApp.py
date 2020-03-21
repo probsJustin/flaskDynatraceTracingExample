@@ -15,23 +15,24 @@ sdk = oneagent.get_sdk()
 
 wappinfo = sdk.create_web_application_info(
     virtual_host='testDevice',  # this will be your servers name in the metadata for the request "Server name = testDevice"
-    application_id='Example SDK Info',  # Name of the service
+    application_id='Example Cherry Py SDK Info',  # Name of the service
     context_root='/'  # note if you put anything other than '/' this will show up in the service name as "(/yourService)"
 )
 
 class StringGenerator(object):
     @cherrypy.expose
     def index(self):
-        traceRequest = sdk.trace_incoming_web_request(wappinfo, request.base_url, request.method, dict(request.headers))
+        traceRequest = sdk.trace_incoming_web_request(wappinfo, cherrypy.request.base + cherrypy.request.path_info, cherrypy.request.method, dict(cherrypy.request.headers))
         with traceRequest:
             # do things here
             # the status code if you want
+
             traceRequest.set_status_code(200)
-            return "Hello World!"
+        return "Hello World!"
 
     @cherrypy.expose
     def generate(self):
-        traceRequest = sdk.trace_incoming_web_request(wappinfo, request.base_url, request.method, dict(request.headers))
+        traceRequest = sdk.trace_incoming_web_request(wappinfo, cherrypy.request.base + cherrypy.request.path_info, cherrypy.request.method, dict(cherrypy.request.headers))
         with traceRequest:
             # do things here
             # the status code if you want
