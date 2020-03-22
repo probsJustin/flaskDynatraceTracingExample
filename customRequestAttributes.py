@@ -25,7 +25,6 @@ wappinfo = sdk.create_web_application_info(
     context_root='/'  # note if you put anything other than '/' this will show up in the service name as "(/yourService)"
 )
 
-
 @app.route("/")
 def hello():
     traceRequest = sdk.trace_incoming_web_request(wappinfo, request.base_url, request.method, dict(request.headers))
@@ -52,7 +51,7 @@ def outgoingflask():
     with traceRequest:
         url = 'http://127.0.0.1'
         outGoingTracer = sdk.trace_outgoing_web_request(url, "GET")
-        sdk.add_custom_request_attribute('test', 42)
+
         with outGoingTracer:
             tag = outGoingTracer.outgoing_dynatrace_string_tag
             headers = {"Test": "things", DYNATRACE_HTTP_HEADER_NAME: tag}
