@@ -25,6 +25,28 @@ wappinfo = sdk.create_web_application_info(
     context_root='/'  # note if you put anything other than '/' this will show up in the service name as "(/yourService)"
 )
 
+# Decorator Definition
+def oneagent_incomingTrace(func):
+    def tracer(*args, **kwargs):
+        tracerObject = sdk.trace_incoming_web_request(
+            wappinfo,
+            request.base_url,
+            request.method,
+            remote_address=request.remote_addr,
+            headers=dict(request.headers)
+            )
+
+        if tracerObject:
+            with tracerObject:
+                kwargs['wreq'] = tracerObject
+                tracerArgs = func(*args, **kwargs)
+                tracerObject.set_status_code(200)
+        else:
+                tracerArgs = func(*args, **kwargs)
+        return tracerArgs
+    return tracer
+
+
 
 @app.route("/")
 def hello():
@@ -32,7 +54,7 @@ def hello():
     with traceRequest:
         # do things here
         # the status code if you want
-        print(requests.get('http://127.0.0.1').content)
+        # print(requests.get('http://127.0.0.1').content)
         traceRequest.set_status_code(200)
         return "Hello World!"
 
@@ -60,6 +82,24 @@ def outgoingflask():
             print(response)
         traceRequest.set_status_code(200)
         return "Hello World!"
+
+
+
+
+# Tracer Decorator, allows easy instrumentation of each web request
+
+@app.route('/exampleDecoratorPath')
+@oneagent_incomingTrace  # Web Tracer Decorator
+def health(wreq):
+    wreq.set_status_code(200)
+    return "Hello world!"
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run()
